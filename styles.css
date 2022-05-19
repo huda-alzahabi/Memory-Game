@@ -19,8 +19,9 @@ h1 {
 .uppercont,
 .lowercont {
     display: flex;
+    flex-wrap: nowrap;
     align-items: center;
-    width: 100%;
+    width: auto;
     height: 50%;
     justify-content: center;
 }
@@ -47,4 +48,11 @@ div>div>div {
 
 .bluediv {
     background-color: blue;
+}
+
+@media only screen and (max-width: 800px) {
+    .uppercont,
+    .lowercont {
+        display: block;
+    }
 }
