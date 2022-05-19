@@ -1,10 +1,10 @@
-window.addEventListener("load", random_generator, false);
+window.addEventListener("load", start_game, false);
 var random = 5;
 
 function random_generator() {
     document.addEventListener("keypress", function(event) {
         random = getRandomInt(4);
-        startgame();
+        choose_div();
     });
 }
 
@@ -12,7 +12,7 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
-function startgame() {
+function choose_div() {
     if (random == 0) {
         play_audio("green.mp3");
         var element = document.getElementById("0");
@@ -42,5 +42,16 @@ function startgame() {
         setTimeout(function() {
             element.style.backgroundColor = c;
         }, 250);
+    }
+}
+
+function start_game() {
+    for (var i = 0; i < 15; i++) {
+        random_generator();
+        for (var j = 0; j < i; j++) {
+            document.addEventListener("click", function(e) {
+                console.log(e.target.id);
+            });
+        }
     }
 }
