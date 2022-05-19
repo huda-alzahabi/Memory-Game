@@ -1,0 +1,50 @@
+body {
+    background-color: navy;
+}
+
+h1 {
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-family: cursive;
+}
+
+.bigcontainer {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+}
+
+.uppercont,
+.lowercont {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+    justify-content: center;
+}
+
+div>div>div {
+    border: 5px solid black;
+    border-radius: 15px;
+    width: 100px;
+    height: 100px;
+    margin: 1%;
+}
+
+.greendiv {
+    background-color: green;
+}
+
+.reddiv {
+    background-color: red;
+}
+
+.yellowdiv {
+    background-color: yellow;
+}
+
+.bluediv {
+    background-color: blue;
+}
