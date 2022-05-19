@@ -10,8 +10,7 @@ function getRandomInt(max) {
 
 function startgame() {
     if (random == 0) {
-        var audio = new Audio("../assets/sounds/green.mp3");
-        audio.play();
+        play_audio("green.mp3");
 
         var element = document.getElementById("0");
         element.style.backgroundColor = "black";
@@ -19,8 +18,7 @@ function startgame() {
             element.style.backgroundColor = "green";
         }, 250);
     } else if (random == 1) {
-        var audio = new Audio("../assets/sounds/red.mp3");
-        audio.play();
+        play_audio("red.mp3");
 
         var element = document.getElementById("1");
         element.style.backgroundColor = "black";
@@ -28,8 +26,7 @@ function startgame() {
             element.style.backgroundColor = "red";
         }, 250);
     } else if (random == 2) {
-        var audio = new Audio("../assets/sounds/yellow.mp3");
-        audio.play();
+        play_audio("yellow.mp3");
 
         var element = document.getElementById("2");
         element.style.backgroundColor = "black";
@@ -37,13 +34,17 @@ function startgame() {
             element.style.backgroundColor = "yellow";
         }, 250);
     } else {
-        var audio = new Audio("../assets/sounds/blue.mp3");
-        audio.play();
+        play_audio("blue.mp3");
 
         var element = document.getElementById("3");
         element.style.backgroundColor = "black";
         setTimeout(function() {
             element.style.backgroundColor = "blue";
         }, 250);
+    }
+
+    function play_audio(a) {
+        var audio = new Audio("../assets/sounds/" + a);
+        audio.play();
     }
 }
