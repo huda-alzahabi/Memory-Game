@@ -1,9 +1,9 @@
 window.addEventListener("load", firstGeneration, false);
 var random = 5; //initializing global variable random that'll be used later, generated randomly
 var level_counter = 0;
-var answer = true;
 in_game = false;
-
+let user_clicks_array = [];
+let array_of_randoms = [];
 //first level starts on any keypress
 function firstGeneration() {
     document.addEventListener("keypress", startGame);
@@ -17,10 +17,13 @@ function getRandomInt(max) {
 //choose a div to flash based on the random number generated
 function chooseDiv() {
     level_counter++;
+    user_clicks_array = [];
+    document.getElementById("press").innerHTML = "Level " + level_counter;
+    random = getRandomInt(4);
+    array_of_randoms.push(random);
     if (random == 0) {
         playAudio("green.mp3");
         var element = document.getElementById("0");
-        element.style.backgroundColor = "black";
         flashColor("green");
     } else if (random == 1) {
         playAudio("red.mp3");
@@ -50,13 +53,11 @@ function playAudio(a) {
 }
 
 //initializing empty arrays to compare the user clicks with the sequence of patterns that the game generated
-var user_clicks_array = [];
-var array_of_randoms = [];
 
 function startGame() {
+    document.getElementById("press").innerHTML = "Level " + level_counter;
     in_game = true;
-    random = getRandomInt(4);
-    array_of_randoms.push(random); //generate a random number to flash a div and save its value in the array that we'll use to compare later
+    //generate a random number to flash a div and save its value in the array that we'll use to compare later
     chooseDiv(); //flash div based on random number generated
     document.removeEventListener("keypress", startGame);
 
@@ -64,33 +65,31 @@ function startGame() {
     document.addEventListener(
         "click",
         function(e) {
-            if (e.currentTarget.id == 0) playAudio("green.mp3");
-            else if (e.currentTarget.id == 1) playAudio("red.mp3");
-            else if (e.currentTarget.id == 2) playAudio("yellow.mp3");
+            if (e.target.id == 0) playAudio("green.mp3");
+            else if (e.target.id == 1) playAudio("red.mp3");
+            else if (e.target.id == 2) playAudio("yellow.mp3");
             else playAudio("blue.mp3");
-            user_clicks_array.push(e.currentTarget.id);
-
-            //check the user's answer, if it's false end the game, if it's true go to the next level
-            if (checkAnswer() == false) {
-                document.getElementById("press").innerHTML = "Game Over";
-            } else {
-                user_clicks_array = [];
-                startGame();
-                //bede ontor luserclicks laysero add l array of randoms b3den b3mil choosediv jdede
-                // if (user_clicks_array.length === array_of_randoms.length) choose_div();
-            }
+            user_clicks_array.push(e.target.id);
+            checkAnswer(user_clicks_array.length - 1);
         },
         false
     );
 }
 
-function checkAnswer() {
-    for (var i = 0; i < user_clicks_array.length; i++) {
-        if (array_of_randoms[i] !== parseInt(user_clicks_array[i])) {
-            answer = false;
-        } else {
-            answer = true;
-        }
+function checkAnswer(i) {
+    if (array_of_randoms[i] == user_clicks_array[i]) {
+        if (array_of_randoms.length == user_clicks_array.length)
+            setTimeout(chooseDiv, 250);
+    } else {
+        document.getElementById("press").innerHTML = "Game Over";
+        playAudio("wrong.mp3");
+        setTimeout(function() {
+            document.body.style.backgroundColor = "red";
+        }, 1000);
     }
-    return answer;
+
+    level_counter = 0;
+    in_game = false;
+    array_of_randoms = [];
+    user_clicks_array = [];
 }
