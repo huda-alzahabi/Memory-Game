@@ -65,10 +65,31 @@ function startGame() {
     document.addEventListener(
         "click",
         function(e) {
-            if (e.target.id == 0) playAudio("green.mp3");
-            else if (e.target.id == 1) playAudio("red.mp3");
-            else if (e.target.id == 2) playAudio("yellow.mp3");
-            else playAudio("blue.mp3");
+            if (e.target.id == 0) {
+                playAudio("green.mp3");
+                e.target.style.backgroundColor = "grey";
+                setTimeout(function() {
+                    e.target.style.backgroundColor = "green";
+                }, 250);
+            } else if (e.target.id == 1) {
+                playAudio("red.mp3");
+                e.target.style.backgroundColor = "grey";
+                setTimeout(function() {
+                    e.target.style.backgroundColor = "red";
+                }, 250);
+            } else if (e.target.id == 2) {
+                playAudio("yellow.mp3");
+                e.target.style.backgroundColor = "grey";
+                setTimeout(function() {
+                    e.target.style.backgroundColor = "yellow";
+                }, 250);
+            } else {
+                playAudio("blue.mp3");
+                e.target.style.backgroundColor = "grey";
+                setTimeout(function() {
+                    e.target.style.backgroundColor = "blue";
+                }, 250);
+            }
             user_clicks_array.push(e.target.id);
             checkAnswer(user_clicks_array.length - 1);
         },
