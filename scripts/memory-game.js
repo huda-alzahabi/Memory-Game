@@ -106,8 +106,9 @@ function checkAnswer(i) {
         document.getElementById("press").innerHTML =
             "Game Over! Press Any Key to Restart ";
         playAudio("wrong.mp3");
+        document.body.style.backgroundColor = "red";
         setTimeout(function() {
-            document.body.style.backgroundColor = "red";
+            document.body.style.backgroundColor = "navy";
         }, 1000);
         level_counter = 0;
         in_game = false;
