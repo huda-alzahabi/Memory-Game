@@ -29,9 +29,9 @@ h1 {
 div>div>div {
     border: 5px solid black;
     border-radius: 15px;
-    width: 100px;
-    height: 100px;
-    margin: 1%;
+    width: 180px;
+    height: 180px;
+    margin: 3%;
 }
 
 .greendiv {
