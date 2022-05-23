@@ -1,9 +1,10 @@
 window.addEventListener("load", firstGeneration, false);
 var random = 5; //initializing global variable random that'll be used later, generated randomly
-var level_counter = 0;
-in_game = false;
-let user_clicks_array = [];
-let array_of_randoms = [];
+var level_counter = 0; //counter to know which level the user is in
+in_game = false; // to check if the game started or not
+let user_clicks_array = []; //to save user clicks
+let array_of_randoms = []; //to save the id of the generated div (save the pattern)
+
 //first level starts on any keypress
 function firstGeneration() {
     document.addEventListener("keypress", startGame);
@@ -16,10 +17,10 @@ function getRandomInt(max) {
 
 //choose a div to flash based on the random number generated
 function chooseDiv() {
-    level_counter++;
-    user_clicks_array = [];
-    document.getElementById("press").innerHTML = "Level " + level_counter;
-    random = getRandomInt(4);
+    level_counter++; //generating a new div means the user made it to the next level, so we increment the level
+    user_clicks_array = []; //empty the user clicks since a new level started
+    document.getElementById("press").innerHTML = "Level " + level_counter; //print current level
+    random = getRandomInt(4); //generate a new random number then flash a div accordingly
     array_of_randoms.push(random);
     if (random == 0) {
         playAudio("green.mp3");
@@ -57,11 +58,9 @@ function playAudio(a) {
 function startGame() {
     document.getElementById("press").innerHTML = "Level " + level_counter;
     in_game = true;
-    //generate a random number to flash a div and save its value in the array that we'll use to compare later
-    chooseDiv(); //flash div based on random number generated
-    document.removeEventListener("keypress", startGame);
+    chooseDiv();
 
-    //save user clicks in an array and play audios for each color according to its id
+    //save user clicks in an array and play audios for each color according to its id and change the style of the pressed div
     document.addEventListener(
         "click",
         function(e) {
@@ -99,10 +98,13 @@ function startGame() {
 
 function checkAnswer(i) {
     if (array_of_randoms[i] == user_clicks_array[i]) {
+        //check if the user clicks are the same as the generated ones in the game and call the function that generates the div again, meaning the user has passed to the next level
         if (array_of_randoms.length == user_clicks_array.length)
             setTimeout(chooseDiv, 500);
     } else {
-        document.getElementById("press").innerHTML = "Game Over";
+        //if the user didn't click correctly as the generated pattern, he loses, the game is over, and everything is reset
+        document.getElementById("press").innerHTML =
+            "Game Over! Press Any Key to Restart ";
         playAudio("wrong.mp3");
         setTimeout(function() {
             document.body.style.backgroundColor = "red";
