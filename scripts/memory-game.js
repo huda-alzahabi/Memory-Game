@@ -100,17 +100,16 @@ function startGame() {
 function checkAnswer(i) {
     if (array_of_randoms[i] == user_clicks_array[i]) {
         if (array_of_randoms.length == user_clicks_array.length)
-            setTimeout(chooseDiv, 250);
+            setTimeout(chooseDiv, 500);
     } else {
         document.getElementById("press").innerHTML = "Game Over";
         playAudio("wrong.mp3");
         setTimeout(function() {
             document.body.style.backgroundColor = "red";
         }, 1000);
+        level_counter = 0;
+        in_game = false;
+        array_of_randoms = [];
+        user_clicks_array = [];
     }
-
-    level_counter = 0;
-    in_game = false;
-    array_of_randoms = [];
-    user_clicks_array = [];
 }
